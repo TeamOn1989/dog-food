@@ -99,6 +99,14 @@
 	display: flex;
 }
 
+.card__favorite svg {
+	fill: rgb(190, 189, 189);
+}
+
+.card__favorite_is-active svg {
+	fill: rgb(240, 3, 3);
+}
+
 .card__cart {
 	margin-top: auto;
 }

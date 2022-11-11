@@ -1,7 +1,14 @@
 import './index.css';
-import save from "./save.svg";
+import {ReactComponent as Save} from "./save.svg";
+import cn from "classnames"
 
-const Card = ( { name, price, discount, wight, description, isFavorite, picture } ) => {
+const Card = ( { name, price, discount, wight, description, pictures, onProductLike, _id, likes, curretnUser } ) => {
+	function handleLikeClick() {
+		onProductLike({_id, likes})
+	}
+	const isLiked = likes.some(id => id === curretnUser._id)
+
+
 	const discountPrice = Math.floor(price - (price * discount / 100))
 	return (
 		<div className="card">
@@ -9,12 +16,14 @@ const Card = ( { name, price, discount, wight, description, isFavorite, picture 
 				{discount !== 0 && <span className="card__discount">{`-${discount}%`}</span>}
 			</div>
 			<div className="card__sticky card__sticky_type_top-right">
-				<button className='card__favorite'>
-					<img src={save} alt="В избранное" className='card__favourite-icon' />
+				<button className={cn('card__favorite', {
+					"card__favorite_is-active": isLiked,
+				})} onClick={handleLikeClick}>
+					<Save className='card__favourite-icon'/>
 				</button>
 			</div>
 			<a href="/product" className="card__link">
-				<img src={picture} alt={description} className="card__image" />
+				<img src={pictures} alt={description} className="card__image" />
 				<div className="card__desc">
 					<span className={discount !==0 ? "card__old-price" : "card__price"}>{price}&nbsp;₽</span>
 					{discount !== 0 && <span className="card__price card__price_type_discount">{discountPrice}&nbsp;₽</span>}

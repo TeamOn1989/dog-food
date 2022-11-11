@@ -2,11 +2,11 @@ import Card from '../Card/card';
 import './index.css';
 
 
-const CardList = ({goods}) => {
+const CardList = ({goods, onProductLike, curretnUser}) => {
 	return (
 		<div className='cards'>		
 		{
-			goods.map((item, index )=> <Card key={index} {...item}/>)
+			goods.map((item)=> <Card key={item._id} {...item} curretnUser={curretnUser} onProductLike={onProductLike}/>)
 		}	
 		</div>		
 	);
